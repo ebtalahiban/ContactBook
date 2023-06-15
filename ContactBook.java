@@ -10,6 +10,13 @@ public class ContactBook {
     }
     /** Add new contact to the contact book.*/
     public void addContact(String name, String phoneNumber){
+        // Do not all to add contact with duplicate name.
+        for(int i=0; i<contactCount; i++){
+            if(contactbook[i][0].equals(name)){
+                System.out.println("Contact name already exist.");
+                return;
+            }
+        }
         if(contactCount <= maxContacts){
             contactbook[contactCount][0] = name;
             contactbook[contactCount][1] = phoneNumber;
@@ -60,5 +67,13 @@ public class ContactBook {
 
     public static void main(String[] args) {
         ContactBook contact = new ContactBook();
+        contact.addContact("Erica", "12345");
+        contact.addContact("Angel", "67891");
+        contact.addContact("Appa", "25896");
+        contact.addContact("Appa", "25896");
+        contact.displayContact();
+        contact.searchContact("Erica");
+        contact.deleteContact("Erica");
+        contact.displayContact();
     }
 }
