@@ -1,12 +1,24 @@
 public class ContactBook {
 
+    private int maxContacts = 100;
+    private String[][] contactbook;
+    private int contactCount;
+
     public ContactBook(){
-        int max = 100;
-        String[][] contactbook = new String[max][2];
+        this.contactbook = new String[maxContacts][2];
+        this.contactCount = 0;
     }
 
-    public void addContact(){
-
+    public void addContact(String name, String phoneNumber){
+        if(contactCount <= maxContacts){
+            contactbook[contactCount][0] = name;
+            contactbook[contactCount][1] = phoneNumber;
+            contactCount++;
+            System.out.println("Contact successfully added.");
+        }
+        else{
+            System.out.println("Contact Book is full.");
+        }
     }
 
     public void searchContact(){
@@ -22,6 +34,6 @@ public class ContactBook {
     }
 
     public static void main(String[] args) {
-        ContactBook contactbook = new ContactBook();
+        ContactBook contact = new ContactBook();
     }
 }
