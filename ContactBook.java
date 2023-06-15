@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class ContactBook {
 
     private final static int maxContacts = 100;
@@ -66,14 +68,50 @@ public class ContactBook {
     }
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         ContactBook contact = new ContactBook();
-        contact.addContact("Erica", "12345");
-        contact.addContact("Angel", "67891");
-        contact.addContact("Appa", "25896");
-        contact.addContact("Appa", "25896");
-        contact.displayContact();
-        contact.searchContact("Erica");
-        contact.deleteContact("Erica");
-        contact.displayContact();
+
+        while (true){
+            String name;
+            String phoneNumber;
+            System.out.println("Contact Book");
+            System.out.println("1. Add contact");
+            System.out.println("2. Search contact");
+            System.out.println("3. Delete contact");
+            System.out.println("4. Display contact");
+            System.out.println("5. Exit");
+            System.out.print("Enter choice: ");
+            int choice = scanner.nextInt();
+
+            switch (choice){
+                case 1:
+                    System.out.print("Enter name: ");
+                    name = scanner.next();
+                    System.out.print("Enter phone number: ");
+                    phoneNumber = scanner.next();
+                    contact.addContact(name, phoneNumber);
+                    break;
+                case 2:
+                    System.out.print("Enter name to search: ");
+                    name = scanner.next();
+                    contact.searchContact(name);
+                    break;
+                case 3:
+                    System.out.print("Enter name to delete: ");
+                    name = scanner.next();
+                    contact.deleteContact(name);
+                    break;
+                case 4:
+                    System.out.println("List of all your contacts");
+                    contact.displayContact();
+                    break;
+                case 5:
+                    System.out.print("Goodbye!");
+                    System.exit(0);
+                default:
+                    System.out.print("Invalid input.");
+                    break;
+            }
+        }
     }
 }
