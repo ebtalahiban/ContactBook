@@ -27,6 +27,7 @@ public class ContactBook {
                 System.out.println("Contact found.");
                 System.out.println("Name: " + contactbook[i][0]);
                 System.out.println("Phone number : " + contactbook[i][1]);
+                return;
             }
             else{
                 System.out.println("Contact does not exist.");
@@ -34,8 +35,20 @@ public class ContactBook {
         }
     }
     /**Delete an item in the contact book.*/
-    public void deleteContact(){
-
+    public void deleteContact(String name){
+        // find contact
+        for(int i=0; i<contactCount; i++){
+            if(contactbook[i][0].equals(name)){
+                // delete contact and adjust array
+                for(int j=i; j<contactCount-1; j++){
+                    contactbook[j][0] = contactbook[j+1][0];
+                    contactbook[j][1] = contactbook[j+1][1];
+                }
+                contactCount--;
+                System.out.println("Contact successfully deleted.");
+                return;
+            }
+        }
     }
     /**Display all the contact in the contact book.*/
     public void displayContact(){
