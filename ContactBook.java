@@ -11,40 +11,37 @@ public class ContactBook {
         this.contactCount = 0;
     }
     /** Add new contact to the contact book.*/
-    public void addContact(String name, String phoneNumber){
+    public String addContact(String name, String phoneNumber){
         // Do not all to add contact with duplicate name.
+        String response = "";
         for(int i=0; i<contactCount; i++){
             if(contactbook[i][0].equals(name)){
-                System.out.println("Contact name already exist.");
-                return;
+                return "Contact name already exist.";
             }
         }
         if(contactCount <= maxContacts){
             contactbook[contactCount][0] = name;
             contactbook[contactCount][1] = phoneNumber;
-            System.out.println("Contact successfully added.");
             contactCount++;
+            return "Contact successfully added.";
         }
         else{
-            System.out.println("Contact Book is full.");
+            return "Contact Book is full.";
         }
     }
     /**Search information in the contact book using name as key.*/
-    public void searchContact(String name){
+    public String searchContact(String name){
         for(int i=0; i<contactCount; i++){
             if(contactbook[i][0].equals(name)){
-                System.out.println("Contact found.");
                 System.out.println("Name: " + contactbook[i][0]);
                 System.out.println("Phone number : " + contactbook[i][1]);
-                return;
-            }
-            else{
-                System.out.println("Contact does not exist.");
+                return "Contact found.";
             }
         }
+        return "Contact does not exist.";
     }
     /**Delete an item in the contact book.*/
-    public void deleteContact(String name){
+    public String deleteContact(String name){
         // find contact
         for(int i=0; i<contactCount; i++){
             if(contactbook[i][0].equals(name)){
@@ -54,10 +51,10 @@ public class ContactBook {
                     contactbook[j][1] = contactbook[j+1][1];
                 }
                 contactCount--;
-                System.out.println("Contact successfully deleted.");
-                return;
+                return "Contact successfully deleted.";
             }
         }
+        return "Contact does not exist.";
     }
     /**Display all the contact in the contact book.*/
     public void displayContact(){
@@ -83,34 +80,33 @@ public class ContactBook {
             System.out.print("Enter choice: ");
             int choice = scanner.nextInt();
 
-            switch (choice){
-                case 1:
+            switch (choice) {
+                case 1 -> {
                     System.out.print("Enter name: ");
                     name = scanner.next();
                     System.out.print("Enter phone number: ");
                     phoneNumber = scanner.next();
-                    contact.addContact(name, phoneNumber);
-                    break;
-                case 2:
+                    System.out.println(contact.addContact(name, phoneNumber));
+                }
+                case 2 -> {
                     System.out.print("Enter name to search: ");
                     name = scanner.next();
                     contact.searchContact(name);
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     System.out.print("Enter name to delete: ");
                     name = scanner.next();
-                    contact.deleteContact(name);
-                    break;
-                case 4:
+                    System.out.println(contact.deleteContact(name));
+                }
+                case 4 -> {
                     System.out.println("List of all your contacts");
                     contact.displayContact();
-                    break;
-                case 5:
+                }
+                case 5 -> {
                     System.out.print("Goodbye!");
                     System.exit(0);
-                default:
-                    System.out.print("Invalid input.");
-                    break;
+                }
+                default -> System.out.print("Invalid input.");
             }
         }
     }
